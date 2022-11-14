@@ -342,8 +342,10 @@ class DavService: IntentService("DavService") {
 
                             // remember usable collections
                             if ((service.type == Service.TYPE_CARDDAV && info.type == Collection.TYPE_ADDRESSBOOK) ||
-                                    (service.type == Service.TYPE_CALDAV && arrayOf(Collection.TYPE_CALENDAR, Collection.TYPE_WEBCAL).contains(info.type)))
-                                collections[response.href] = info
+                                    (service.type == Service.TYPE_CALDAV && arrayOf(Collection.TYPE_CALENDAR, Collection.TYPE_WEBCAL).contains(info.type))) {
+                                val url = collections.values.find { it.type == info.type }?.url?.let(UrlUtils::withTrailingSlash) ?: response.href
+                                collections[url] = info
+                            }
                         }
                     } catch(e: HttpException) {
                         if (e.code in arrayOf(403, 404, 410))
