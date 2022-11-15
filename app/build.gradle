@@ -57,7 +57,7 @@ android {
     flavorDimensions "distribution"
     productFlavors {
         ose {
-            versionNameSuffix "-ose"
+            versionNameSuffix "-ose-wps"
         }
     }
 
