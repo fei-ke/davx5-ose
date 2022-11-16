@@ -293,6 +293,9 @@ class DavService: IntentService("DavService") {
         }
 
         try {
+
+            if (collections.isNotEmpty()) return
+
             Logger.log.info("Refreshing ${service.type} collections of service #$service")
 
             // cancel previous notification
